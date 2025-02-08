@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Note
+# This script is equivalent to clicking download button with "Prezipped File" option enabled on BTS website.
+# It's url is
+# https://transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FGJ&QO_fu146_anzr=
 
 # constants
 BTS="https://transtats.bts.gov/PREZIP"
