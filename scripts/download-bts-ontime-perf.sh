@@ -3,6 +3,7 @@
 # constants
 BTS="https://transtats.bts.gov/PREZIP"
 BASEURL="${BTS}/On_Time_Reporting_Carrier_On_Time_Performance_1987_present"
+ZIP_CONTENT_PREFIX="On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)"
 
 function run() {
   local year=$1
@@ -10,10 +11,10 @@ function run() {
   local month_end=$3
 
   for m in `seq $month_start $month_end` ; do
-    echo "${BASEURL}_${year}_${m}.zip"
+    year_mon=$(printf "%04d%02d" $year $m)
     curl -k -o tmp.zip "${BASEURL}_${year}_${m}.zip"
-    unzip tmp.zip On_Time_Reporting_Carrier_On_Time_Performance_\(1987_present\)_${year}_${m}.csv && \
-      mv On_Time_Reporting_Carrier_On_Time_Performance_\(1987_present\)_${year}_${m}.csv ${year}_${m}.csv
+    unzip tmp.zip ${ZIP_CONTENT_PREFIX}_${year}_${m}.csv && \
+      mv ${ZIP_CONTENT_PREFIX}_${year}_${m}.csv ${year_mon}.csv
     rm -v tmp.zip
   done
 }
@@ -47,6 +48,10 @@ function main() {
         ;;
     esac
   done
+
+  if [[ $start -gt $end ]]; then
+    echo "Err: Start month bigger than end month. "
+  fi
 
   run $year $start $end
 }
