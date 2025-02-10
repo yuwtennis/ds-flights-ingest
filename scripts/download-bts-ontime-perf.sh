@@ -55,7 +55,10 @@ function main() {
 
   if [[ $start -gt $end ]]; then
     echo "Err: Start month bigger than end month. "
+    exit 1
   fi
+
+  echo "Downloading files for year: $year month from $start to $end."
 
   run $year $start $end
 }
