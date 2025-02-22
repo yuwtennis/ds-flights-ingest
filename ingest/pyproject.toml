@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ingest"
+version = "0.1.0"
+description = ""
+authors = ["ywatanabe <yu.w.tennis@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+apache-beam = "^2.63.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3"
+pylint = "~2"
+mypy = "^1.15"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
