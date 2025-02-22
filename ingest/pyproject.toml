@@ -7,11 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-apache-beam = "^2.63.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3"
-pylint = "~2"
+pylint = "~2.15"
 mypy = "^1.15"
 
 [build-system]
