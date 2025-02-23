@@ -7,6 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+google-cloud-storage = "~3"
+google-cloud-bigquery = "~3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3"

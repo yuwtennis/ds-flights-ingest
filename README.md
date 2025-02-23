@@ -19,9 +19,6 @@ _Tested version_ in the table represents the version which I have used for testi
 | gcloud            | 486.0.0                                                       |
 | bq                | 2.1.7                                                         |
 | gsutil            | 5.30                                                          | 
-| java              | 1.8.0_432                                                     |
-| flyway opensource | [11.3.1](https://github.com/flyway/flyway/tree/flyway-11.3.1) |
-| terraform         | see [main.tf](terraform/main.tf)                              |
 
 ## Tutorial
 
@@ -33,27 +30,28 @@ Follow official guide on cloud sdk, [gcloud cli](https://cloud.google.com/sdk/do
 
 2 Set up cloud resource
 
-```shell
-cd terraform
-terraform init
-terraform plan
-terraform apply
-```
+See README in [data-science-with-flights-iac](https://github.com/yuwtennis/data-science-with-flights-iac)
 
 3 Run DDL statements on bigquery  
 
-First setup flyway environment accordingly. Flyway required jdbc lib specific to biguqery (see [doc](https://documentation.red-gate.com/fd/google-bigquery-277579314.html)).
-I used the [Command-line style of opensource version](https://documentation.red-gate.com/flyway/getting-started-with-flyway/quickstart-guides/quickstart-command-line).  
-
-```shell
-cd flyway
-./flyway migration
-```
-
+See README in [data-science-with-flights-ddl](https://github.com/yuwtennis/data-science-with-flights-ddl)
 
 ### Ingest data as data-in-place style
+
+#### Shell script
 
 ```shell
 cd script
 bash ingest.sh -y YEAR -s START_MONTH -e END_MONTH
+```
+
+#### Python
+
+```shell
+poetry run python3.11 __main__.py \
+  --bucket YOURBUCKET \
+  --year YEAR \
+  --month MONTH \
+  --project GOOGLE_CLOUD_PROJECT_ID \
+  --dest_bq_tbl_fqdn BQ_TBL_FQDN
 ```
