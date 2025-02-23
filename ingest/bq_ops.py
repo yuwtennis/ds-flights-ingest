@@ -1,10 +1,10 @@
-""" Module bq_load """
+""" Module bq_ops """
 import logging
 
 from google.cloud import bigquery
 
-class BqLoad:  # pylint: disable=too-few-public-methods
-    """ Manages load job """
+class BqOps:  # pylint: disable=too-few-public-methods
+    """ Operations related to bigquery """
     LOGGER = logging.getLogger(__name__)
     LOGGER.setLevel(logging.INFO)
 
@@ -34,9 +34,9 @@ class BqLoad:  # pylint: disable=too-few-public-methods
         res: bigquery.job._AsyncJob = loaded_job.result()
 
         if res.error_result is not None:
-            BqLoad.LOGGER.info("Something went wrong while loading csv. errs: %s", res.errors)
+            BqOps.LOGGER.info("Something went wrong while loading csv. errs: %s", res.errors)
             raise RuntimeError()
 
-        BqLoad.LOGGER.info(
+        BqOps.LOGGER.info(
             "%s rows inserted into %s",
             self._client.get_table(dest_bq_tbl_fqdn).num_rows, dest_bq_tbl_fqdn)

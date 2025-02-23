@@ -47,11 +47,23 @@ bash ingest.sh -y YEAR -s START_MONTH -e END_MONTH
 
 #### Python
 
+Set environment variables in advance.
+
+| Key              | Description                                 |
+|------------------|---------------------------------------------|
+| GC_PROJECT_ID    | YOUR Google Cloud project ID                |
+| GCS_BUCKET       | Google Storage Bucket Name to upload csv to |
+| BQ_DEST_TBL_FQDN | Bigquery Table FQDN to upload csv data to   |
+| YEAR             | Year of the csv to download                 |
+| MONTH            | 2 digit month of the csv to download        |
+
+Run the script
+
 ```shell
 poetry run python3.11 __main__.py \
   --bucket YOURBUCKET \
   --year YEAR \
   --month MONTH \
   --project GOOGLE_CLOUD_PROJECT_ID \
-  --dest_bq_tbl_fqdn BQ_TBL_FQDN
+  --bq_dest_tbl_fqdn BQ_TBL_FQDN
 ```
