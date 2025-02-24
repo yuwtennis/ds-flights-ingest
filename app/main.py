@@ -1,6 +1,5 @@
 """ Root module for Flask """
 import logging
-import tempfile
 import traceback
 
 from flask import Flask
@@ -12,7 +11,7 @@ from ingest.settings import RuntimeEnv
 app = Flask(__name__)
 
 @app.route("/", methods=['POST'])
-def ingest_flights():
+def ingest_flights() -> str:
     """ Function which will hook data loading process """
     try:
         json = request.get_json()
@@ -36,5 +35,7 @@ def ingest_flights():
 
     # pylint: disable=broad-except
     # pylint: disable=invalid-name
-    except Exception as e:
+    except Exception:
         logging.error('Try again later. err: %s', traceback.format_exc().splitlines())
+
+        return "Error"
