@@ -21,18 +21,29 @@ def main() -> None:
 
     :return:
     """
-    logging.basicConfig(level=logging.ERROR)
+    logging.basicConfig(level=logging.INFO)
     parser = arg_parser()
 
-    App.run(
-        RuntimeEnv(
-            gc_project_id=parser.project_id,
-            gcs_bucket=parser.bucket,
-            bq_dest_tbl_fqdn=parser.dest_bq_tbl_fqdn,
-            year=parser.year,
-            month=parser.month
+    try:
+        App.run(
+            RuntimeEnv(
+                gc_project_id=parser.project_id,
+                gcs_bucket=parser.bucket,
+                bq_dest_tbl_fqdn=parser.dest_bq_tbl_fqdn,
+                year=parser.year,
+                month=parser.month
+            )
         )
-    )
+
+    except Exception as e:  # pylint: disable=invalid-name
+        logging.error("Something went wrong!")
+
+        # pylint: disable=fixme
+        # TODO Structured logging
+        raise RuntimeError() from e
+    finally:
+        logging.info("Cleaning up directories and files.")
+        shutil.rmtree(workdir)
 
 if __name__ == "__main__":
     main()
