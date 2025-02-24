@@ -1,5 +1,8 @@
 import logging
 import argparse
+import shutil
+import tempfile
+
 from ingest.app import App
 from ingest.settings import RuntimeEnv
 
@@ -41,9 +44,6 @@ def main() -> None:
         # pylint: disable=fixme
         # TODO Structured logging
         raise RuntimeError() from e
-    finally:
-        logging.info("Cleaning up directories and files.")
-        shutil.rmtree(workdir)
 
 if __name__ == "__main__":
     main()

@@ -67,3 +67,23 @@ poetry run python3.11 __main__.py \
   --project GOOGLE_CLOUD_PROJECT_ID \
   --bq_dest_tbl_fqdn BQ_TBL_FQDN
 ```
+
+### Deploy cloud run 
+
+```shell
+(ingest-py3.11) [ywatanabe@lemp13 data-science-with-flights]$ gcloud run deploy ingest-flights-monthly \
+  --region asia-northeast1 \
+  --source . \
+  --platform managed \
+  --timeout 12m \
+  --cpu .5 \
+  --memory 512Mi \
+  --service-account svc-monthly-ingest@elite-caster-125113.iam.gserviceaccount.com \
+  --no-allow-unauthenticated
+```
+
+You will be asked to create Artifact Registry. Type Y and press enter for this purpose.
+
+```shell
+Deploying from source requires an Artifact Registry Docker repository to store built containers. A repository named [cloud-run-source-deploy] in region [asia-northeast1] will be created.
+```
