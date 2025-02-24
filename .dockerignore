@@ -1,0 +1,11 @@
+.github/
+.idea/
+.venv/
+scripts/
+tests/
+.pylintrc
+.pytest.ini
+.dockerignore
+__main__.py
+readme.html
+README.md
