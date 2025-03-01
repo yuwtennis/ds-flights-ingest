@@ -1,11 +1,11 @@
 """ Module settings"""
-from typing import Optional
-from pydantic import Field, BaseModel
+
+from pydantic import BaseModel, model_validator
 
 class RuntimeEnv(BaseModel):
     """ Runtime variables """
     gc_project_id: str
     gcs_bucket: str
-    year: Optional[str] = Field(default=None)
-    month: Optional[str] = Field(default=None)
+    year: str | None = ...
+    month: str | None = ...
     bq_dest_tbl_fqdn: str

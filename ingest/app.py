@@ -30,8 +30,10 @@ class App:  # pylint: disable=too-few-public-methods
             year = settings.year
             month = settings.month
             gs = GsOps(settings.gc_project_id)  # pylint: disable=invalid-name
+
             if year is None or month is None:
                 year, month = gs.next_month(settings.gcs_bucket, GS_FLIGHTS_SUFFIX)
+
             App.LOGGER.info("Downloading csv file from BTS site.")
             dl_csv_path = CsvDownload.to_filesystem(year, month, workdir)
 

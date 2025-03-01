@@ -16,19 +16,13 @@ def ingest_flights() -> str:
     try:
         json = request.get_json()
 
-        year = escape(json['year']) if 'year' in json else None
-        month = escape(json['month']) if 'month' in json else None
-        bucket = escape(json['bucket'])
-        project_id = escape(json['project_id'])
-        dest_bq_tbl_fqdn = escape(json['dest_bq_tbl_fqdn'])
-
         App.run(
             RuntimeEnv(
-                gc_project_id=project_id,
-                gcs_bucket=bucket,
-                year=year,
-                month=month,
-                bq_dest_tbl_fqdn=dest_bq_tbl_fqdn
+                gc_project_id=escape(json['project_id']),
+                gcs_bucket=escape(json['bucket']),
+                year=escape(json['year']) if 'year' in json else None,
+                month=escape(json['month']) if 'month' in json else None,
+                bq_dest_tbl_fqdn=escape(json['dest_bq_tbl_fqdn'])
         ))
 
         return "Success"
