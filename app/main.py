@@ -2,13 +2,16 @@
 import logging
 import traceback
 
-from flask import Flask
-from flask import request
+from flask import request, abort, Flask, jsonify
 from markupsafe import escape
 from ingest.app import App
 from ingest.settings import RuntimeEnv
 
 app = Flask(__name__)
+
+@app.errorhandler(500)
+def exception_handler(e):
+    return jsonify(error=str(e)), 500
 
 @app.route("/", methods=['POST'])
 def ingest_flights() -> str:
@@ -32,4 +35,4 @@ def ingest_flights() -> str:
     except Exception:
         logging.error('Try again later. err: %s', traceback.format_exc().splitlines())
 
-        return "Error"
+        abort( 500, "Somthing went wrong" )

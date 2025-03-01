@@ -60,25 +60,27 @@ Set environment variables in advance.
 Run the script
 
 ```shell
+export PROJECT_ID=$(gcloud config get core/project)
 poetry run python3.11 __main__.py \
   --bucket YOURBUCKET \
   --year YEAR \
   --month MONTH \
-  --project GOOGLE_CLOUD_PROJECT_ID \
+  --project $PROJECT_ID \
   --bq_dest_tbl_fqdn BQ_TBL_FQDN
 ```
 
 ### Deploy cloud run 
 
 ```shell
-(ingest-py3.11) [ywatanabe@lemp13 data-science-with-flights]$ gcloud run deploy ingest-flights-monthly \
+export PROJECT_ID=$(gcloud config get core/project)
+gcloud run deploy ingest-flights-monthly \
   --region asia-northeast1 \
   --source . \
   --platform managed \
   --timeout 12m \
   --cpu .5 \
   --memory 512Mi \
-  --service-account svc-monthly-ingest@elite-caster-125113.iam.gserviceaccount.com \
+  --service-account svc-monthly-ingest@${PROJECT_ID}.iam.gserviceaccount.com \
   --no-allow-unauthenticated
 ```
 
@@ -86,4 +88,11 @@ You will be asked to create Artifact Registry. Type Y and press enter for this p
 
 ```shell
 Deploying from source requires an Artifact Registry Docker repository to store built containers. A repository named [cloud-run-source-deploy] in region [asia-northeast1] will be created.
+```
+
+```shell
+export URL=https://ingest-flights-monthly-462754264937.asia-northeast1.run.app 
+curl -k -X POST $URL  \
+  -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
+  -H "Content-Type:application/json" --data-binary @/tmp/messages
 ```
