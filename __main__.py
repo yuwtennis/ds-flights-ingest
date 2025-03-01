@@ -1,7 +1,5 @@
 import logging
 import argparse
-import shutil
-import tempfile
 
 from ingest.app import App
 from ingest.settings import RuntimeEnv
@@ -24,7 +22,11 @@ def main() -> None:
 
     :return:
     """
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%S%z"
+    )
     parser = arg_parser()
 
     try:
