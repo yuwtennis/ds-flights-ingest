@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "ingest"
+version = "0.1.0"
+description = ""
+authors = ["ywatanabe <yu.w.tennis@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+google-cloud-storage = "~3"
+google-cloud-bigquery = "~3"
+pydantic = "~2"
+pydantic-settings = "~2"
+Flask = "~3.0.3"
+gunicorn = "~23.0.0"
+Werkzeug = "~3.0.3"
+markupsafe = "~3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3"
+pylint = "~2.15"
+mypy = "^1.15"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

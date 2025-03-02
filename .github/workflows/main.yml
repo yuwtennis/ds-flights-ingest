@@ -1,0 +1,7 @@
+on: push
+
+jobs:
+  ingest-test:
+    uses: ./.github/workflows/cicd-python-test.yml
+    with:
+      app_dir: ./
