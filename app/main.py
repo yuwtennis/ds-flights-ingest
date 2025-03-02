@@ -10,7 +10,8 @@ from ingest.settings import RuntimeEnv
 app = Flask(__name__)
 
 @app.errorhandler(500)
-def exception_handler(e):
+def exception_handler(e):  # pylint: disable=invalid-name
+    """ Exception handler"""
     return jsonify(error=str(e)), 500
 
 @app.route("/", methods=['POST'])
