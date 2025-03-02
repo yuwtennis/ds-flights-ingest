@@ -69,7 +69,11 @@ poetry run python3.11 __main__.py \
   --bq_dest_tbl_fqdn BQ_TBL_FQDN
 ```
 
-### Deploy cloud run 
+#### On cloud
+
+##### Deployment
+
+Deploy the python on cloud run.
 
 ```shell
 export PROJECT_ID=$(gcloud config get core/project)
@@ -90,9 +94,27 @@ You will be asked to create Artifact Registry. Type Y and press enter for this p
 Deploying from source requires an Artifact Registry Docker repository to store built containers. A repository named [cloud-run-source-deploy] in region [asia-northeast1] will be created.
 ```
 
+##### Testing
+
+Create payload file.
+
 ```shell
-export URL=https://ingest-flights-monthly-462754264937.asia-northeast1.run.app 
+echo  {\"bucket\":\"${PROJECT_ID}-cf-staging\", \"dest_bq_tbl_fqdn\":\"dsongcp.flights_raw\", \"project_id\":\"$PROJECT_ID\", \"year\":\"2016\", \"month\":\"01\"} > /tmp/messages
+```
+
+Send POST request to the deployment.
+
+```shell
+export PROJECT_ID=$(gcloud config get core/project)
+export PROJECT_NUM=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+export URL=https://ingest-flights-monthly-${PROJECT_NUM}.asia-northeast1.run.app 
 curl -k -X POST $URL  \
   -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
   -H "Content-Type:application/json" --data-binary @/tmp/messages
+```
+
+Check that you see below message prompts back.
+
+```markdown
+Success
 ```
