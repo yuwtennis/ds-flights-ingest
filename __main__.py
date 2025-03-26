@@ -1,8 +1,8 @@
 import logging
 import argparse
 
-from ingest.app import App
-from ingest.settings import RuntimeEnv
+from ds_flights_ingest.app import App
+from ds_flights_ingest.settings import RuntimeEnv
 
 def arg_parser() -> argparse.Namespace:
     """

@@ -3,11 +3,11 @@ import logging
 import shutil
 import tempfile
 
-from ingest.bq_ops import BqOps
-from ingest.csv_download import CsvDownload
-from ingest.settings import RuntimeEnv
-from ingest.zip_extract import ZipExtract
-from ingest.gs_ops import GsOps
+from ds_flights_ingest.bq_ops import BqOps
+from ds_flights_ingest.csv_download import CsvDownload
+from ds_flights_ingest.settings import RuntimeEnv
+from ds_flights_ingest.zip_extract import ZipExtract
+from ds_flights_ingest.gs_ops import GsOps
 
 GS_FLIGHTS_SUFFIX="flights/raw"
 

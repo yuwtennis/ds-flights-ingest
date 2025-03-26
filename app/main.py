@@ -4,8 +4,8 @@ import traceback
 
 from flask import request, abort, Flask, jsonify
 from markupsafe import escape
-from ingest.app import App
-from ingest.settings import RuntimeEnv
+from ds_flights_ingest.app import App
+from ds_flights_ingest.settings import RuntimeEnv
 
 app = Flask(__name__)
 
