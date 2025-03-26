@@ -1,25 +1,30 @@
-[tool.poetry]
-name = "ingest"
+[project]
+name = "ds_flights_ingest"
 version = "0.1.0"
 description = ""
-authors = ["ywatanabe <yu.w.tennis@gmail.com>"]
+authors = [
+    {name= "Yu Watanabe", email="yu.w.tennis@gmail.com"}
+]
 readme = "README.md"
+requires-python = "~=3.11.0"
+dependencies  = [
+    "google-cloud-storage~=3.0",
+    "google-cloud-bigquery~=3.0",
+    "pydantic~=2.0",
+    "pydantic-settings~=2.0",
+    "Flask~=3.0.3",
+    "gunicorn~=23.0.0",
+    "Werkzeug~=3.0.3",
+    "markupsafe~=3.0"
+    ]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-google-cloud-storage = "~3"
-google-cloud-bigquery = "~3"
-pydantic = "~2"
-pydantic-settings = "~2"
-Flask = "~3.0.3"
-gunicorn = "~23.0.0"
-Werkzeug = "~3.0.3"
-markupsafe = "~3"
+[tool.poetry.group.dev]
+optional = true
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3"
+pytest = "~8.3"
 pylint = "~2.15"
-mypy = "^1.15"
+mypy = "~1.15"
 
 [build-system]
 requires = ["poetry-core"]
