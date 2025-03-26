@@ -2,7 +2,6 @@ FROM python:3.11-slim
 
 ENV APP_HOME=/app
 ENV POETRY_HOME=/opt/poetry
-ENV POETRY_VERSION=1.8.3
 
 WORKDIR $APP_HOME
 COPY . ./
